@@ -68,7 +68,7 @@ We welcome contributions from the community. To contribute:
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-Project Lead - [Your Name](mailto:your-email@example.com)
+Project Lead - [just-sudo-it](mailto:lefteris.michailides@gmail.com)
 
 Project Link: [https://github.com/just-sudo-it/NestNav](https://github.com/just-sudo-it/NestNav)
 
