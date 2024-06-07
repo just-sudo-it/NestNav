@@ -1,7 +1,7 @@
-package Data;
+package com.nestnav.mobile.models;
 
-import Concurrency.ThreadSafeList;
-import org.json.JSONArray;
+import com.nestnav.mobile.concurrency.*;
+
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -31,35 +31,33 @@ public class Accommodation implements Serializable {
         this.localImagePath = localImagePath;
         bookedDates.addAll(initialDates);
     }
+    public  Accommodation(){}
 
-    public Accommodation() {}
-
-    public static List<Accommodation> readAccommodationsFromJson(String jsonPath) throws Exception {
-        String content = new String(Files.readAllBytes(Paths.get(jsonPath)));
-        JSONArray jsonArray = new JSONArray(content);
-
-        List<Accommodation> accommodations = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-            String roomName = jsonObj.getString("roomName");
-            int noOfPersons = jsonObj.getInt("noOfPersons");
-            String area = jsonObj.getString("area");
-            int stars = jsonObj.getInt("stars");
-            int noOfReviews = jsonObj.getInt("noOfReviews");
-            String localImagePath = jsonObj.getString("roomImage");
-
-            List<Date> initialDates = new ArrayList<>(); // Assume dates are needed, add parsing if JSON contains date info.
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            // If JSON has dates, you'd parse them like:
-            // JSONArray datesJson = jsonObj.getJSONArray("dates");
-            // for (int j = 0; j < datesJson.length(); j++) {
-            //     initialDates.add(sdf.parse(datesJson.getString(j)));
-            // }
-
-            accommodations.add(new Accommodation(roomName, noOfPersons, area, stars, noOfReviews, localImagePath, initialDates));
+    private static Accommodation readAccommodationFromJson(String jsonPath) throws Exception {
+        String content = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            content = new String(Files.readAllBytes(Paths.get(jsonPath)));
         }
-        return accommodations;
+
+        JSONObject jsonObj = new JSONObject(content);
+
+        String roomName = jsonObj.getString("roomName");
+        int noOfPersons = jsonObj.getInt("noOfPersons");
+        String area = jsonObj.getString("area");
+        int stars = jsonObj.getInt("stars");
+        int noOfReviews = jsonObj.getInt("noOfReviews");
+        String localImagePath = jsonObj.getString("roomImage");
+
+        // Parsing dates might be needed, example:
+        List<Date> initialDates = new ArrayList<>(); // Assume dates are needed, add parsing if JSON contains date info.
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // If JSON has dates, you'd parse them like:
+        // JSONArray datesJson = jsonObj.getJSONArray("dates");
+        // for (int i = 0; i < datesJson.length(); i++) {
+        //     initialDates.add(sdf.parse(datesJson.getString(i)));
+        // }
+
+        return new Accommodation(roomName, noOfPersons, area, stars, noOfReviews, localImagePath, initialDates);
     }
 
     public synchronized boolean book(Date startDate, Date endDate) {

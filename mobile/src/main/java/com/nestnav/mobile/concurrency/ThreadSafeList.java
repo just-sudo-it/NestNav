@@ -44,8 +44,30 @@ public class ThreadSafeList<T> {
             list.removeAll(items);
         }
     }
+
+    public void remove(T item) {
+        synchronized (lock) {
+            list.remove(item);
+        }
+    }
+
+    public boolean isEmpty() {
+        synchronized (lock) {
+            return list.isEmpty();
+        }
+    }
+
+    public T poll() {
+        synchronized (lock) {
+            if (!list.isEmpty()) {
+                return list.remove(0);
+            }
+            return null;
+        }
+    }
+
     public Stream<T> stream() {
-        synchronized (list) {
+        synchronized (lock) {
             return new ArrayList<>(list).stream();  // Make a copy for safe streaming outside the synchronized block
         }
     }

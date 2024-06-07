@@ -10,10 +10,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.nestnav.mobile.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
@@ -27,8 +23,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment.
+        // Return a PlaceholderFragment (defined as a static inner class below).
         return PlaceholderFragment.newInstance(position + 1);
     }
 

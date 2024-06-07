@@ -1,0 +1,18 @@
+[
+    {
+        "roomName": "roomName1",
+        "noOfPersons": 5,
+        "area": "Area1",
+        "stars": 3,
+        "noOfReviews": 15,
+        "roomImage": "C:\\Development\\_Terry_\\source\\repos\\personal\\NestNav\\backend\\UserData\\images.jpeg"
+    },
+    {
+        "roomName": "roomName2",
+        "noOfPersons": 4,
+        "area": "Area2",
+        "stars": 4,
+        "noOfReviews": 10,
+        "roomImage": "C:\\Development\\_Terry_\\source\\repos\\personal\\NestNav\\backend\\UserData\\images.jpeg"
+    }
+]
